@@ -58,7 +58,8 @@ jobs:
         with:
           name: rust
           path: dist/
-      - run: zip-r artifacts dist/
+      - name: Zip files artifacts
+        run: zip-r artifacts.zip dist/*
       - name: Create Github Release
         env:
           VERSION: "${{ needs.get-version.outputs.version }}"
