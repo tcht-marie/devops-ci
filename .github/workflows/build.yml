@@ -30,6 +30,7 @@ jobs:
       - name: Setup Rust
         uses: actions-rs/toolchain@v1.0.6
         with:
+          # toolchain obligatoire quand on met target
           toolchain: stable
           target: wasm32-unknown-unknown
       #- name: Rustfmt Check
