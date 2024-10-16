@@ -24,7 +24,7 @@ jobs:
       - name: Checkout clone source code
         uses: actions/checkout@v4
       - name: Trunk action
-        uses: jetli/trunk-action@v0.5
+        uses: jetli/trunk-action@v0.5.0
       - name: Build with Trunk
         env:
           VERSION: "${{ needs.get-version.outputs.version }}"
