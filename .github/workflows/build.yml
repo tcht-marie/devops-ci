@@ -15,6 +15,7 @@ jobs:
     with:
       # détecter mes branches de release (je peux en mettre plusieurs)
       release-branches: '^(main)$'
+      prerelease-branches: '^(beta)$'
 
   build:
     name: Rust Build
