@@ -1,0 +1,58 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  background: linear-gradient(to bottom right, #444444, #009a5b);
+  font-size: 1.5rem;
+}
+
+main {
+  color: #fff6d5;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.logo {
+  height: 20em;
+}
+
+.heart:after {
+  content: "❤️";
+
+  font-size: 1.75em;
+}
+
+h1+.subtitle {
+  display: block;
+  margin-top: -1em;
+}
+
+section#counter {
+  margin-top: 10px;
+
+  >div {
+    display: flex;
+    direction: horizontal;
+    justify-content: center;
+
+    >* {
+      min-width: 100px;
+    }
+
+    >button,
+    input {
+      font-size: 1.5rem;
+      border: #fff6d5 4px solid;
+      border-radius: 25px;
+      background: rgba(0, 0, 0, .5);
+      color: #fff6d5
+    }
+  }
+}
