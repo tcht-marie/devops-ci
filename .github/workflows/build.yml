@@ -21,10 +21,10 @@ jobs:
     steps:
       - name: Setup Rust
         uses: actions-rust-lang/setup-rust-toolchain@v1
-      - name: Trunk Check
-        uses: trunk-io/trunk-action@v1
       - name: Checkout clone source code
         uses: actions/checkout@v4
+      - name: Trunk Check
+        uses: trunk-io/trunk-action@v1
       - name: Build with Trunk
         env:
           VERSION: "${{ needs.get-version.outputs.version }}"
