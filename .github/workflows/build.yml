@@ -58,4 +58,4 @@ jobs:
           COMMIT: "${{ github.sha }}"
           GH_TOKEN: "${{ github.token }}"
         run: |
-          gh release create --repo $REPO --target $COMMIT $VERSION build/*
+          gh release create --repo $REPO --target $COMMIT $VERSION dist/*
