@@ -32,7 +32,7 @@ jobs:
       - name: Build with Trunk
         env:
           VERSION: "${{ needs.get-version.outputs.version }}"
-        run: trunk build --release
+        run: trunk serve
       - uses: actions/upload-artifact@v4
         with:
           name: rust
@@ -57,4 +57,5 @@ jobs:
           COMMIT: "${{ github.sha }}"
           GH_TOKEN: "${{ github.token }}"
         run: |
+          trunk build --release
           gh release create --repo $REPO --target $COMMIT $VERSION build/*
