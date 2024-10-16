@@ -24,7 +24,7 @@ jobs:
       - name: Setup Rust
         uses: actions-rs/toolchain@v1.0.6
         with:
-          toolchain: wasm32-unknown-unknown
+          target: wasm32-unknown-unknown
       #- name: Rustfmt Check
        # uses: actions-rust-lang/rustfmt@v1
       - name: Trunk action
