@@ -67,5 +67,6 @@ jobs:
           REPO: "${{ github.repository }}"
           COMMIT: "${{ github.sha }}"
           GH_TOKEN: "${{ github.token }}"
+          CHANGELOGS: "${{ needs.get-version.outputs.changelogs }}"
         run: |
-          gh release create --repo $REPO --target $COMMIT $VERSION dist/*
+          gh release create --repo $REPO --target $COMMIT $CHANGELOGS $VERSION dist/*
