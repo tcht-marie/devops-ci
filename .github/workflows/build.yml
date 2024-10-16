@@ -13,6 +13,8 @@ jobs:
   build:
     name: Rust Build
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
      # si get-version voit un commit qui permet une release (montée de version), il fait le build, sinon fait pas le build
     if: ${{ needs.get-version.outputs.will-release == 'true' }}
      # on doit lui dire qu'on a besoin de get-version pour le build (récupère que les sorties du job)
@@ -53,4 +55,4 @@ jobs:
           COMMIT: "${{ github.sha }}"
           GH_TOKEN: "${{ github.token }}"
         run: |
-          gh release create --repo $REPO --target $COMMIT $VERSION build/*
+          trunk serve --release create --repo $REPO --target $COMMIT $VERSION build/*
