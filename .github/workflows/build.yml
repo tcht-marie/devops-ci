@@ -1,0 +1,56 @@
+on:
+  push:
+
+jobs:
+  # name pour ce job
+  get-version:
+    # récupération du code get-version sur le repo de shiipou sur la branche main
+    uses: shiipou/github-actions/.github/workflows/get-version.yml@main
+    with:
+      # détecter mes branches de release (je peux en mettre plusieurs)
+      release-branches: '^(main)$'
+
+  build:
+    name: Rust Build
+    runs-on: ubuntu-latest
+     # si get-version voit un commit qui permet une release (montée de version), il fait le build, sinon fait pas le build
+    if: ${{ needs.get-version.outputs.will-release == 'true' }}
+     # on doit lui dire qu'on a besoin de get-version pour le build (récupère que les sorties du job)
+    needs: 
+      - get-version
+    steps:
+      - name: Setup Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+      - name: Trunk Check
+        uses: trunk-io/trunk-action@v1
+      - name: Checkout clone source code
+        uses: actions/checkout@v4
+      - name: Build with Trunk
+        env:
+          VERSION: "${{ needs.get-version.outputs.version }}"
+        run: trunk serve
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rust
+          path: build/libs/
+          
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs:
+      - get-version
+      - build
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: rust
+          path: build/
+      - name: Create Github Release
+        env:
+          VERSION: "${{ needs.get-version.outputs.version }}"
+          REPO: "${{ github.repository }}"
+          COMMIT: "${{ github.sha }}"
+          GH_TOKEN: "${{ github.token }}"
+        run: |
+          gh release create --repo $REPO --target $COMMIT $VERSION build/*
