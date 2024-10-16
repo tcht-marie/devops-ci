@@ -1,6 +1,9 @@
 on:
   push:
 
+permissions:
+  contents: write
+
 jobs:
   # name pour ce job
   get-version:
